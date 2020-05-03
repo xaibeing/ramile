@@ -38,7 +38,11 @@ class ProjectProcessor(object):
         """ Checks whether the specified path is ignored.
         """
         for ignore in self.project.ignore:
+            # .ramileconfig.json中配置的ignore路径只需从项目根目录开始，为根目录下的子目录
+            ignore = os.path.join(self.project.source_root, ignore)
+            # print("ignore =", ignore)
             if path.startswith(ignore):
+                print("ignore!!!", path)
                 return True
         return False
 
